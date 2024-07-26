@@ -1,9 +1,14 @@
-const userData = require("./user");
-const carData = require("./car");
+// const userData = require("./user");
+// const carData = require("./car");
 
-console.log(userData.user);
+// console.log(userData.user);
 
-userData.userLogger();
+// userData.userLogger();
 
-console.log(carData.car, carData.city.name);
-carData.carLogger();
+// console.log(carData.car, carData.city.name);
+// carData.carLogger();
+
+for(let i = 0; i <5; i--) {
+    console.log(i);
+    alert("Yeding")
+}
