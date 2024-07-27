@@ -19,7 +19,7 @@ bot.on("message", async (msg) => {
            }
            const getVideaUrl=await downloaderMethod(msg.text)
            await bot.sendVideo(chatId, getVideaUrl.videoURL,{
-            caption:"Bot tuzuvchisi <b>Muhsinbek Mirzamatov</b>"
+            caption:"Bot tuzuvchisi Muhsinbek Mirzamatov"
            })
            if(msg.text === "/video"){
                await bot.sendMessage(chatId, "Video linkini yuboring")
