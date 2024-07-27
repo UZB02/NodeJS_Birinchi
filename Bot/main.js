@@ -9,9 +9,10 @@ bot.on("message", async (msg) => {
            const chatId=msg.chat.id;
            if(msg.text === "/start"){
               const name = msg.from.first_name;
+              const lastname = msg.from.last_name;
               await bot.sendMessage(
                 chatId,
-                `Assalomu Aleykum <b>${name}</b> botimizga xush kelibsiz.\nBotga istagram vidio linkini yuboring va uni siz yuklab beramiz`,
+                `Assalomu Aleykum <b>${name}</b> <b>${lastname}</b> botimizga xush kelibsiz.\nBotga istagram vidio linkini yuboring va uni siz yuklab beramiz`,
                 {
                   parse_mode: "HTML",
                 }
@@ -19,10 +20,16 @@ bot.on("message", async (msg) => {
            }
            const getVideaUrl=await downloaderMethod(msg.text)
            await bot.sendVideo(chatId, getVideaUrl.videoURL,{
-            caption:"Bot tuzuvchisi Muhsinbek Mirzamatov"
+            caption:"Tuzuvchi Muhsinbek Mirzamatov"
            })
            if(msg.text === "/video"){
                await bot.sendMessage(chatId, "Video linkini yuboring")
+            }else if(msg.text.toLocaleLowerCase()==="salom"){
+              await bot.sendMessage(chatId, "Assalomu Aleykum")
+            }else if(msg.text.toLocaleLowerCase()==="seni kim tuzgan"){
+              await bot.sendMessage(chatId, "Meni Muhsinbek Mirzamatov tuzgan")
+            }else if(msg.text.toLocaleLowerCase()==="tuzuvching kim"){
+              await bot.sendMessage(chatId, "Muhsinbek Mirzamatov tuzuvchi")
             }
     }catch(err){
         console.log(err)

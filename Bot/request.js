@@ -22,7 +22,6 @@ async function downloaderMethod (videoURL){
         caption:response.data[0].title
     }
     return result;
-    console.log(response.data);
     }catch(err) {
         console.log(err);
     }
