@@ -12,17 +12,34 @@ bot.on("message", async (msg) => {
               const lastname = msg.from.last_name;
               await bot.sendMessage(
                 chatId,
-                `Assalomu Aleykum <b>${name}</b> <b>${lastname}</b> botimizga xush kelibsiz.\nBotga istagram vidio linkini yuboring va uni siz yuklab beramiz`,
+                `Assalomu Aleykum <pre><b>${name}</b> <b>${
+                  lastname ? lastname : ""
+                }</b></pre> botimizga xush kelibsiz.\nBotga instagram vidio linkini yuboring va uni siz yuklab beramiz`,
                 {
                   parse_mode: "HTML",
                 }
               );
            }
            const getVideaUrl=await downloaderMethod(msg.text)
-           await bot.sendVideo(chatId, getVideaUrl.videoURL,{
-            caption:"Tuzuvchi Muhsinbek Mirzamatov"
-           })
-           if(msg.text === "/video"){
+         if(getVideaUrl){
+           const loadingMessage = await bot.sendMessage(
+             chatId,
+             "Biroz kuting..."
+           );
+            setTimeout(async () => {
+              await bot.deleteMessage(
+                loadingMessage.chat.id,
+                loadingMessage.message_id
+              );
+            }, 500);
+            await bot.sendVideo(chatId, getVideaUrl.videoURL, {
+              caption: "Tuzuvchi Muhsinbek Mirzamatov",
+            });
+            await bot.deleteMessage(
+              loadingMessage.chat.id,
+              loadingMessage.message_id
+            );
+         }else if(msg.text === "/video"){
                await bot.sendMessage(chatId, "Video linkini yuboring")
             }else if(msg.text.toLocaleLowerCase()==="salom"){
               await bot.sendMessage(chatId, "Assalomu Aleykum")
@@ -32,6 +49,6 @@ bot.on("message", async (msg) => {
               await bot.sendMessage(chatId, "Muhsinbek Mirzamatov tuzuvchi")
             }
     }catch(err){
-        console.log(err)
+        console.log(err);;
     }
 })
